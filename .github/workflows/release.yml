@@ -37,8 +37,29 @@ jobs:
             echo "Tag v${{ steps.get_version.outputs.version }} does not exist"
           fi
 
+      - name: Delete existing release if exists
+        if: steps.check_tag.outputs.exists == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Delete existing GitHub release
+          gh release delete "v${{ steps.get_version.outputs.version }}" --yes || true
+          echo "✅ Deleted existing release v${{ steps.get_version.outputs.version }}"
+
+      - name: Delete existing tag if exists
+        if: steps.check_tag.outputs.exists == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Delete remote tag
+          git push --delete origin "v${{ steps.get_version.outputs.version }}" || true
+          
+          # Delete local tag
+          git tag -d "v${{ steps.get_version.outputs.version }}" || true
+          
+          echo "✅ Deleted existing tag v${{ steps.get_version.outputs.version }}"
+
       - name: Create and push tag
-        if: steps.check_tag.outputs.exists == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -46,9 +67,9 @@ jobs:
           git config user.email "actions@github.com"
           git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release version ${{ steps.get_version.outputs.version }}"
           git push origin "v${{ steps.get_version.outputs.version }}"
+          echo "✅ Created and pushed tag v${{ steps.get_version.outputs.version }}"
 
       - name: Build plugin zip
-        if: steps.check_tag.outputs.exists == 'false'
         run: |
           PLUGIN_NAME="digital-employee-addon-wc-subscriptions"
           ZIP_NAME="${PLUGIN_NAME}.zip"
@@ -75,29 +96,7 @@ jobs:
           echo "zip_file=${ZIP_NAME}" >> $GITHUB_OUTPUT
         id: build_zip
 
-      - name: Generate changelog
-        if: steps.check_tag.outputs.exists == 'false'
-        run: |
-          cat > changelog.txt << 'EOF'
-          # Changelog - Digital Employee Add-on: WooCommerce Subscriptions
-          
-          ## Version ${{ steps.get_version.outputs.version }} - $(date +%Y-%m-%d)
-          
-          ### Changes
-          - Released version ${{ steps.get_version.outputs.version }}
-          
-          ### Download
-          - Download URL: https://${{ secrets.CLOUDFRONT_DOMAIN }}/digital-employee-addon-wc-subscriptions/digital-employee-addon-wc-subscriptions.zip
-          
-          ---
-          For detailed release notes, visit: https://github.com/${{ github.repository }}/releases/tag/v${{ steps.get_version.outputs.version }}
-          EOF
-          
-          echo "Generated changelog.txt"
-          cat changelog.txt
-
       - name: Upload ZIP to Private S3 Bucket
-        if: steps.check_tag.outputs.exists == 'false'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -115,7 +114,6 @@ jobs:
           echo "✅ Uploaded digital-employee-addon-wc-subscriptions.zip to private S3 bucket"
 
       - name: Upload Changelog to Public S3 Bucket
-        if: steps.check_tag.outputs.exists == 'false'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -132,7 +130,6 @@ jobs:
           echo "✅ Uploaded changelog.txt to public S3 bucket"
 
       - name: Invalidate CloudFront Cache
-        if: steps.check_tag.outputs.exists == 'false'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -148,7 +145,6 @@ jobs:
           echo "✅ CloudFront cache invalidated for changelog.txt"
 
       - name: Create GitHub Release
-        if: steps.check_tag.outputs.exists == 'false'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.get_version.outputs.version }}

@@ -4,14 +4,22 @@ This document explains how to set up the automated release workflow for the Digi
 
 ## Overview
 
-The workflow automatically:
-1. Detects version changes in the main plugin file
-2. Creates a git tag for the new version
-3. Builds a production-ready zip file
-4. Uploads the zip to private Amazon S3 bucket (no public access)
-5. Generates and uploads changelog.txt to public S3 bucket
-6. Invalidates CloudFront cache for the changelog
-7. Creates a GitHub release
+The workflow automatically on **every commit**:
+1. Detects version in the main plugin file
+2. Checks if version tag already exists on GitHub
+3. **If tag exists:** Deletes existing GitHub release and tag
+4. Builds a production-ready zip file
+5. Uploads the zip to private Amazon S3 bucket (no public access)
+6. Uploads changelog.txt from repository to public S3 bucket
+7. Invalidates CloudFront cache for the changelog
+8. Creates a git tag for the version (fresh or recreated)
+9. Creates a GitHub release with download links
+
+**This means:**
+- 🔄 Every commit fully updates S3, tags, and GitHub releases
+- 🏷️ Tags and releases are recreated if they already exist
+- 📦 You can push bug fixes without bumping version (everything gets updated)
+- 🆕 Bump version when you want a new version number
 
 ## Architecture
 
@@ -153,20 +161,55 @@ To release a new version:
    define( 'DE_WP_BRIDGE_VERSION', '1.0.1' );
    ```
 
-3. Commit and push to main/master branch:
+3. Update `changelog.txt` with the new version details:
+   ```txt
+   = 1.0.1 - 2026-01-02 =
+   * Added feature X
+   * Fixed bug Y
+   * Improved performance
+   ```
+
+4. Update `changelog.txt` in the repository root:
+   ```txt
+   = 1.0.1 - 2026-01-02 =
+   * Added new feature X
+   * Fixed bug Y
+   * Improved performance Z
+   ```
+
+5. Commit and push to main/master branch:
    ```bash
-   git add digital-employee-wp-bridge.php
+   git add digital-employee-wp-bridge.php changelog.txt
    git commit -m "Bump version to 1.0.1"
    git push origin main
    ```
 
-4. The workflow will automatically:
-   - Create tag `v1.0.1`
+6. The workflow will automatically:
+   - Check if tag `v1.0.1` exists
+   - **Delete existing release and tag if they exist**
    - Build `digital-employee-wp-bridge.zip` (no version in filename)
    - Upload ZIP to **private** S3 bucket
-   - Generate and upload `changelog.txt` to **public** S3 bucket
+   - Upload `changelog.txt` from repository to **public** S3 bucket
    - Invalidate CloudFront cache for changelog
-   - Create GitHub release
+   - **Create tag `v1.0.1`** (fresh or recreated)
+   - **Create GitHub release** (fresh or recreated)
+
+### Updating Code Without Version Bump
+
+You can push bug fixes or updates without changing the version:
+
+```bash
+# Make your code changes
+git add .
+git commit -m "Fix minor bug in admin panel"
+git push origin main
+```
+
+**Result:** 
+- Existing tag/release for current version are deleted
+- S3 gets updated with latest code
+- Tag and release are recreated with latest code
+- Users always get the latest version from the same version number!
 
 ## Files Excluded from Zip
 
