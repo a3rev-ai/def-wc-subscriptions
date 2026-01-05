@@ -1,4 +1,4 @@
-=== Digital Employee Add-on: WooCommerce Subscriptions ===
+=== Digital Employees - WooCommerce Subscriptions ===
 Contributors: a3rev
 Tags: subscriptions, woocommerce, api, digital employee, ai, rest api
 Requires at least: 6.0
@@ -12,9 +12,9 @@ Extends Digital Employee Framework with WooCommerce Subscriptions integration fo
 
 == Description ==
 
-Digital Employee Add-on: WooCommerce Subscriptions extends the Digital Employee Framework - WordPress Bridge plugin with comprehensive subscription management capabilities for WooCommerce Subscriptions.
+Digital Employees - WooCommerce Subscriptions extends the Digital Employee Framework - Core plugin with comprehensive subscription management capabilities for WooCommerce Subscriptions.
 
-This addon enables Digital Employee AI applications to search subscriptions, retrieve subscription details, order history, and manage subscription-related operations through secure REST API endpoints.
+This module enables Digital Employee AI applications to search subscriptions, retrieve subscription details, order history, and manage subscription-related operations through secure REST API endpoints.
 
 = Features =
 
@@ -35,7 +35,7 @@ All endpoints require JWT authentication and are available under `/wp-json/a3-ai
 
 = Requirements =
 
-* Digital Employee Framework - WordPress Bridge (main plugin)
+* Digital Employee Framework - Core (main plugin)
 * WooCommerce plugin installed and activated
 * WooCommerce Subscriptions plugin installed and activated
 * PHP 8.0 or higher
@@ -63,7 +63,7 @@ All endpoints require JWT authentication and are available under `/wp-json/a3-ai
 = Requirements Check =
 
 Before installing, ensure you have:
-1. Digital Employee Framework - WordPress Bridge plugin installed and activated
+1. Digital Employee Framework - Core plugin installed and activated
 2. WooCommerce plugin installed and activated
 3. WooCommerce Subscriptions plugin installed and activated
 
@@ -71,23 +71,23 @@ Before installing, ensure you have:
 
 1. Log in to your WordPress admin panel
 2. Navigate to Plugins > Add New
-3. Upload the addon zip file
+3. Upload the module zip file
 4. Click "Install Now"
 5. Activate the plugin
 
 = Manual Installation =
 
 1. Ensure required plugins are installed and activated
-2. Upload `digital-employee-addon-wc-subscriptions` folder to `/wp-content/plugins/`
+2. Upload `def-wc-subscriptions` folder to `/wp-content/plugins/`
 3. Activate through the 'Plugins' menu in WordPress
 4. API tools will automatically register with the bridge plugin
 
 = Configuration =
 
-No additional configuration required. The addon automatically registers its API endpoints with the main bridge plugin.
+No additional configuration required. The module automatically registers its API endpoints with the main bridge plugin.
 
 To enable/disable specific endpoints:
-1. Navigate to **Settings > Digital Employee Bridge**
+1. Navigate to **Settings > Digital Employees**
 2. Scroll to **API Tools** section
 3. Toggle individual subscription endpoints on/off
 
@@ -95,19 +95,19 @@ To enable/disable specific endpoints:
 
 = Do I need the main bridge plugin? =
 
-Yes. This addon requires Digital Employee Framework - WordPress Bridge to function.
+Yes. This module requires Digital Employee Framework - Core to function.
 
 = What version of WooCommerce Subscriptions is supported? =
 
-This addon supports WooCommerce Subscriptions 2.0 and higher.
+This module supports WooCommerce Subscriptions 2.0 and higher.
 
 = Are the API endpoints secure? =
 
 Yes. All endpoints require JWT authentication from the main bridge plugin.
 
-= Does this addon affect store performance? =
+= Does this module affect store performance? =
 
-No. The addon includes intelligent caching to minimize performance impact.
+No. The module includes intelligent caching to minimize performance impact.
 
 = Can I search subscriptions by customer email? =
 
@@ -115,11 +115,11 @@ Yes. The search endpoint supports searching by email, subscription ID, and order
 
 = Can Digital Employee modify subscriptions? =
 
-Currently, the addon provides read-only access to subscription information. Modification capabilities are planned for future releases.
+Currently, the module provides read-only access to subscription information. Modification capabilities are planned for future releases.
 
 = Does this respect WooCommerce permissions? =
 
-Yes. The addon respects WordPress and WooCommerce user capabilities and permissions.
+Yes. The module respects WordPress and WooCommerce user capabilities and permissions.
 
 = Can I access renewal history? =
 
@@ -177,13 +177,13 @@ Yes. The subscription details endpoint includes related orders and renewal histo
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Digital Employee Add-on: WooCommerce Subscriptions.
+Initial release of Digital Employees - WooCommerce Subscriptions.
 
 == Additional Info ==
 
 **Support**: For support inquiries, please visit [a3rev.com](https://a3rev.com/)
 
-**Main Plugin**: Requires Digital Employee Framework - WordPress Bridge
+**Main Plugin**: Requires Digital Employee Framework - Core
 
 **Required Plugins**: WooCommerce, WooCommerce Subscriptions
 
@@ -191,7 +191,7 @@ Initial release of Digital Employee Add-on: WooCommerce Subscriptions.
 
 == Privacy Policy ==
 
-This addon does not collect any additional personal data beyond what WooCommerce and WooCommerce Subscriptions already collect. All API responses respect WooCommerce permissions and privacy settings.
+This module does not collect any additional personal data beyond what WooCommerce and WooCommerce Subscriptions already collect. All API responses respect WooCommerce permissions and privacy settings.
 
 == License ==
 

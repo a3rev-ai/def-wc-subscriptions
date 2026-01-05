@@ -1,36 +1,36 @@
 <?php
 /**
- * Upgrade class for the Digital Employee Add-on: WooCommerce Subscriptions plugin.
+ * Upgrade class for the Digital Employees - WooCommerce Subscriptions plugin.
  *
- * @package digital-employee-addon-wc-subscriptions
+ * @package def-wc-subscriptions
  * @since 0.1.0
  */
 
 /**
- * Upgrade class for the Digital Employee Add-on: WooCommerce Subscriptions plugin.
+ * Upgrade class for the Digital Employees - WooCommerce Subscriptions plugin.
  */
-class Digital_Employee_Addon_WC_Subscriptions_Upgrade {
+class DEF_WC_Subscriptions_Upgrade {
 
 	/**
 	 * The plugin path.
 	 *
 	 * @var string
 	 */
-	protected $plugin_path = DE_ADDON_WC_SUBSCRIPTIONS_PLUGIN_NAME;
+	protected $plugin_path = DEF_MODULE_WC_SUBSCRIPTIONS_PLUGIN_NAME;
 
 	/**
 	 * The plugin key.
 	 *
 	 * @var string
 	 */
-	protected $plugin_key = DE_ADDON_WC_SUBSCRIPTIONS_KEY;
+	protected $plugin_key = DEF_MODULE_WC_SUBSCRIPTIONS_KEY;
 
 	/**
 	 * The plugin version.
 	 *
 	 * @var string
 	 */
-	protected $plugin_version = DE_ADDON_WC_SUBSCRIPTIONS_VERSION;
+	protected $plugin_version = DEF_MODULE_WC_SUBSCRIPTIONS_VERSION;
 
 	/**
 	 * The CloudFront URL.
@@ -182,4 +182,4 @@ class Digital_Employee_Addon_WC_Subscriptions_Upgrade {
 	}
 }
 
-new Digital_Employee_Addon_WC_Subscriptions_Upgrade();
+new DEF_WC_Subscriptions_Upgrade();
