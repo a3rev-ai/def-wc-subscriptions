@@ -1,10 +1,10 @@
 <?php
 /**
- * Class Digital_Employee_Addon_WC_Subscriptions_Tools
+ * Class DEF_WC_Subscriptions_Tool
  *
- * The WooCommerce Subscriptions addon tools for Digital Employee Framework WordPress Bridge.
+ * The WooCommerce Subscriptions module tools for Digital Employee Framework - Core.
  *
- * @package digital-employee-addon-wc-subscriptions
+ * @package def-wc-subscriptions
  * @since 0.1.0
  * @version 0.1.0
  */
@@ -16,15 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Digital_Employee_Addon_WC_Subscriptions_Tool
+ * Class DEF_WC_Subscriptions_Tool
  *
  * Extends the base tool class to provide WooCommerce Subscriptions functionality.
  *
- * @package digital-employee-addon-wc-subscriptions
+ * @package def-wc-subscriptions
  * @since 0.1.0
  * @version 0.1.0
  */
-class Digital_Employee_Addon_WC_Subscriptions_Tools extends Digital_Employee_WP_Bridge_Tool_Base {
+class DEF_WC_Subscriptions_Tool extends DEF_Core_Tool_Base {
 
 	/**
 	 * Initialize the tool.
@@ -33,10 +33,10 @@ class Digital_Employee_Addon_WC_Subscriptions_Tools extends Digital_Employee_WP_
 	 * @version 0.1.0
 	 */
 	protected function init(): void {
-		$this->name    = __( 'WooCommerce Subscriptions', 'digital-employee-addon-wc-subscriptions' );
+		$this->name    = __( 'WooCommerce Subscriptions', 'def-wc-subscriptions' );
 		$this->route   = '/tools/wc/subscriptions';
 		$this->methods = array( 'GET' );
-		$this->addon   = 'woocommerce-subscriptions';
+		$this->module  = 'woocommerce-subscriptions';
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Digital_Employee_Addon_WC_Subscriptions_Tools extends Digital_Employee_WP_
 			return $this->error_response( 'WooCommerce Subscriptions not active', 400 );
 		}
 
-		return Digital_Employee_Addon_WC_Subscriptions_Cache::get_or_set(
+		return DEF_WC_Subscriptions_Cache::get_or_set(
 			'subscriptions',
 			$user->ID,
 			604800, // 7 days - subscriptions change less frequently (should be cached for a week).
@@ -194,7 +194,7 @@ add_action(
 	'plugins_loaded',
 	function () {
 		// Instantiate the tool - it will auto-register via base class if WooCommerce and WooCommerce Subscriptions are active.
-		new Digital_Employee_Addon_WC_Subscriptions_Tools();
+		new DEF_WC_Subscriptions_Tool();
 	},
 	20 // Priority 20 to ensure main plugin is loaded first.
 );

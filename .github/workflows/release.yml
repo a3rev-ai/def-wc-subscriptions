@@ -22,7 +22,7 @@ jobs:
       - name: Extract version from plugin file
         id: get_version
         run: |
-          VERSION=$(grep -oP "Version:\s*\K[\d\.]+" digital-employee-addon-wc-subscriptions.php)
+          VERSION=$(grep -oP "Version:\s*\K[\d\.]+" def-wc-subscriptions.php)
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "Detected version: ${VERSION}"
 
@@ -71,7 +71,7 @@ jobs:
 
       - name: Build plugin zip
         run: |
-          PLUGIN_NAME="digital-employee-addon-wc-subscriptions"
+          PLUGIN_NAME="def-wc-subscriptions"
           ZIP_NAME="${PLUGIN_NAME}.zip"
           
           # Create a temporary directory for the plugin
@@ -108,10 +108,10 @@ jobs:
           
           # Upload ZIP to private bucket in folder (no public access)
           aws s3 cp ${{ steps.build_zip.outputs.zip_file }} \
-            s3://${S3_BUCKET_PRIVATE}/digital-employee-addon-wc-subscriptions/digital-employee-addon-wc-subscriptions.zip \
+            s3://${S3_BUCKET_PRIVATE}/def-wc-subscriptions/def-wc-subscriptions.zip \
             --region ${AWS_REGION_PRIVATE}
           
-          echo "✅ Uploaded digital-employee-addon-wc-subscriptions.zip to private S3 bucket"
+          echo "✅ Uploaded def-wc-subscriptions.zip to private S3 bucket"
 
       - name: Upload Changelog to Public S3 Bucket
         env:
@@ -122,7 +122,7 @@ jobs:
         run: |
           # Upload changelog.txt to public bucket with public-read ACL
           aws s3 cp changelog.txt \
-            s3://${S3_BUCKET_PUBLIC}/digital-employee-addon-wc-subscriptions/changelog.txt \
+            s3://${S3_BUCKET_PUBLIC}/def-wc-subscriptions/changelog.txt \
             --region ${AWS_REGION_PUBLIC} \
             --acl public-read \
             --content-type "text/plain; charset=utf-8"
@@ -139,7 +139,7 @@ jobs:
           # Invalidate CloudFront cache for changelog
           aws cloudfront create-invalidation \
             --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} \
-            --paths "/digital-employee-addon-wc-subscriptions/changelog.txt" \
+            --paths "/def-wc-subscriptions/changelog.txt" \
             --region ${AWS_REGION_PUBLIC}
           
           echo "✅ CloudFront cache invalidated for changelog.txt"
@@ -150,14 +150,14 @@ jobs:
           tag_name: v${{ steps.get_version.outputs.version }}
           name: Release ${{ steps.get_version.outputs.version }}
           body: |
-            ## Digital Employee Add-on: WooCommerce Subscriptions v${{ steps.get_version.outputs.version }}
+            ## Digital Employees – WooCommerce Subscriptions v${{ steps.get_version.outputs.version }}
             
             ### Download
-            - Plugin Zip: `digital-employee-addon-wc-subscriptions.zip` (Available via CloudFront: https://${{ secrets.CLOUDFRONT_DOMAIN }}/digital-employee-addon-wc-subscriptions/digital-employee-addon-wc-subscriptions.zip)
-            - Changelog: https://${{ secrets.CLOUDFRONT_DOMAIN }}/digital-employee-addon-wc-subscriptions/changelog.txt
+            - Plugin Zip: `def-wc-subscriptions.zip` (Available via CloudFront: https://${{ secrets.CLOUDFRONT_DOMAIN }}/def-wc-subscriptions/def-wc-subscriptions.zip)
+            - Changelog: https://${{ secrets.CLOUDFRONT_DOMAIN }}/def-wc-subscriptions/changelog.txt
             
             ### Requirements
-            - Digital Employee Framework - WordPress Bridge
+            - Digital Employee Framework - Core
             - WooCommerce
             - WooCommerce Subscriptions
             

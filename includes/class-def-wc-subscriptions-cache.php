@@ -1,10 +1,10 @@
 <?php
 /**
- * Class Digital_Employee_Addon_WC_Subscriptions_Cache
+ * Class DEF_WC_Subscriptions_Cache
  *
- * Cache handling for WooCommerce Subscriptions addon.
+ * Cache handling for WooCommerce Subscriptions module.
  *
- * @package digital-employee-addon-wc-subscriptions
+ * @package def-wc-subscriptions
  * @since 0.1.0
  * @version 0.1.0
  */
@@ -16,15 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Digital_Employee_Addon_WC_Subscriptions_Cache
+ * Class DEF_WC_Subscriptions_Cache
  *
- * Cache handling for WooCommerce Subscriptions addon.
+ * Cache handling for WooCommerce Subscriptions module.
  *
- * @package digital-employee-addon-wc-subscriptions
+ * @package def-wc-subscriptions
  * @since 0.1.0
  * @version 0.1.0
  */
-final class Digital_Employee_Addon_WC_Subscriptions_Cache {
+final class DEF_WC_Subscriptions_Cache {
 
 	/**
 	 * Initialize cache hooks.
@@ -51,8 +51,8 @@ final class Digital_Employee_Addon_WC_Subscriptions_Cache {
 	 */
 	public static function get_or_set( string $cache_key, int $user_id, int $expiration, callable $callback ): \WP_REST_Response {
 		// Use the main plugin's cache class if available.
-		if ( class_exists( 'Digital_Employee_WP_Bridge_Cache' ) ) {
-			return Digital_Employee_WP_Bridge_Cache::get_or_set( $cache_key, $user_id, $expiration, $callback );
+		if ( class_exists( 'DEF_Core_Cache' ) ) {
+			return DEF_Core_Cache::get_or_set( $cache_key, $user_id, $expiration, $callback );
 		}
 
 		// Fallback: execute callback directly if main cache class not available.
@@ -68,13 +68,13 @@ final class Digital_Employee_Addon_WC_Subscriptions_Cache {
 	 */
 	public static function on_subscription_changed( $subscription ): void {
 		// Use the main plugin's cache class if available.
-		if ( class_exists( 'Digital_Employee_WP_Bridge_Cache' ) ) {
+		if ( class_exists( 'DEF_Core_Cache' ) ) {
 			if ( ! is_object( $subscription ) || ! method_exists( $subscription, 'get_user_id' ) ) {
 				return;
 			}
 			$user_id = $subscription->get_user_id();
 			if ( $user_id ) {
-				Digital_Employee_WP_Bridge_Cache::invalidate_user( $user_id, 'subscriptions' );
+				DEF_Core_Cache::invalidate_user( $user_id, 'subscriptions' );
 			}
 		}
 	}

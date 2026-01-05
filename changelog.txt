@@ -1,4 +1,4 @@
-*** Digital Employee Add-on: WooCommerce Subscriptions Changelog ***
+*** Digital Employees - WooCommerce Subscriptions Changelog ***
 
 = 1.0.0 - 2026/01/02 =
 * Initial Release

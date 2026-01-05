@@ -1,22 +1,22 @@
-# Digital Employee Add-on: WooCommerce Subscriptions
+# Digital Employees - WooCommerce Subscriptions
 
 ## Description
 
-This is an addon plugin for **Digital Employee Framework - WordPress Bridge** that provides WooCommerce Subscriptions integration. It adds API tools for retrieving user subscriptions from WooCommerce Subscriptions.
+This is a module plugin for **Digital Employee Framework - Core** that provides WooCommerce Subscriptions integration. It adds API tools for retrieving user subscriptions from WooCommerce Subscriptions.
 
 ## Requirements
 
 - WordPress 6.0 or higher
 - PHP 8.0 or higher
-- **Digital Employee Framework - WordPress Bridge** plugin (must be installed and activated)
+- **Digital Employee Framework - Core** plugin (must be installed and activated)
 - WooCommerce plugin (must be installed and activated)
 - WooCommerce Subscriptions plugin (optional - tools only register if WooCommerce Subscriptions is active)
 
 ## Installation
 
-1. Upload the `digital-employee-addon-wc-subscriptions` folder to `/wp-content/plugins/`
+1. Upload the `def-wc-subscriptions` folder to `/wp-content/plugins/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Ensure **Digital Employee Framework - WordPress Bridge** is installed and activated
+3. Ensure **Digital Employee Framework - Core** is installed and activated
 4. Ensure WooCommerce is installed and activated
 5. Ensure WooCommerce Subscriptions is installed and activated (if you want to use subscription functionality)
 
@@ -84,24 +84,24 @@ Retrieves subscriptions for the authenticated user.
 
 ## Integration with Main Plugin
 
-This addon registers its tools via the `digital_employee_wp_bridge_register_tools` action hook, which is called by the main plugin during initialization. The tools will automatically appear in the main plugin's admin settings page where they can be enabled/disabled.
+This module registers its tools via the `def_core_register_tools` action hook, which is called by the main plugin during initialization. The tools will automatically appear in the main plugin's admin settings page where they can be enabled/disabled.
 
 ## Development
 
 ### File Structure
 
 ```
-digital-employee-addon-wc-subscriptions/
-├── digital-employee-addon-wc-subscriptions.php  # Main plugin file
+def-wc-subscriptions/
+├── def-wc-subscriptions.php  # Main plugin file
 ├── README.md                                      # This file
 └── includes/
-    ├── class-digital-employee-addon-wc-subscriptions-tools.php  # Tools implementation
-    └── class-digital-employee-addon-wc-subscriptions-cache.php  # Cache handling
+    ├── class-def-wc-subscriptions-tool.php   # Tools implementation
+    └── class-def-wc-subscriptions-cache.php  # Cache handling
 ```
 
 ### Extending
 
-To add more subscription-related tools, extend the `Digital_Employee_Addon_WC_Subscriptions_Tools` class and register additional tools.
+To add more subscription-related tools, extend the `DEF_Module_WC_Subscriptions_Tools` class and register additional tools.
 
 ## Changelog
 
@@ -112,5 +112,5 @@ To add more subscription-related tools, extend the `Digital_Employee_Addon_WC_Su
 
 ## License
 
-Same as Digital Employee Framework - WordPress Bridge
+Same as Digital Employee Framework - Core
 

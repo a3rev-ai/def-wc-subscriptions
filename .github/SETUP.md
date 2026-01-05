@@ -1,6 +1,6 @@
 # GitHub Actions Setup Guide
 
-This document explains how to set up the automated release workflow for the Digital Employee WordPress Bridge plugin.
+This document explains how to set up the automated release workflow for the Digital Employee Framework - Core plugin.
 
 ## Overview
 
@@ -151,14 +151,14 @@ The workflow runs automatically on:
 
 To release a new version:
 
-1. Update the version in `digital-employee-wp-bridge.php`:
+1. Update the version in `def-wc-subscriptions.php`:
    ```php
    * Version: 1.0.1
    ```
 
 2. Update the VERSION constant:
    ```php
-   define( 'DE_WP_BRIDGE_VERSION', '1.0.1' );
+   define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.0.1' );
    ```
 
 3. Update `changelog.txt` with the new version details:
@@ -179,7 +179,7 @@ To release a new version:
 
 5. Commit and push to main/master branch:
    ```bash
-   git add digital-employee-wp-bridge.php changelog.txt
+   git add def-wc-subscriptions.php changelog.txt
    git commit -m "Bump version to 1.0.1"
    git push origin main
    ```
@@ -187,7 +187,7 @@ To release a new version:
 6. The workflow will automatically:
    - Check if tag `v1.0.1` exists
    - **Delete existing release and tag if they exist**
-   - Build `digital-employee-wp-bridge.zip` (no version in filename)
+   - Build `def-wc-subscriptions.zip` (no version in filename)
    - Upload ZIP to **private** S3 bucket
    - Upload `changelog.txt` from repository to **public** S3 bucket
    - Invalidate CloudFront cache for changelog
@@ -227,33 +227,33 @@ The following files/directories are automatically excluded from the production z
 ### Private S3 Bucket (ZIP Files)
 ```
 s3://private-bucket/
-  ├── digital-employee-wp-bridge/
-  │   └── digital-employee-wp-bridge.zip
-  ├── digital-employee-addon-bbpress/
-  │   └── digital-employee-addon-bbpress.zip
-  ├── digital-employee-addon-a3rev-licenses/
-  │   └── digital-employee-addon-a3rev-licenses.zip
-  └── digital-employee-addon-wc-subscriptions/
-      └── digital-employee-addon-wc-subscriptions.zip
+  ├── def-core/
+  │   └── def-core.zip
+  ├── def-bbpress/
+  │   └── def-bbpress.zip
+  ├── def-a3rev-licenses/
+  │   └── def-a3rev-licenses.zip
+  └── def-wc-subscriptions/
+      └── def-wc-subscriptions.zip
 ```
 
 ### Public S3 Bucket (Changelogs)
 ```
 s3://public-bucket/
-  ├── digital-employee-wp-bridge/
+  ├── def-core/
   │   └── changelog.txt
-  ├── digital-employee-addon-bbpress/
+  ├── def-bbpress/
   │   └── changelog.txt
-  ├── digital-employee-addon-a3rev-licenses/
+  ├── def-a3rev-licenses/
   │   └── changelog.txt
-  └── digital-employee-addon-wc-subscriptions/
+  └── def-wc-subscriptions/
       └── changelog.txt
 ```
 
 ### Access URLs (via CloudFront)
 ```
-https://your-cloudfront-domain/digital-employee-wp-bridge/digital-employee-wp-bridge.zip (private, requires auth)
-https://your-cloudfront-domain/digital-employee-wp-bridge/changelog.txt (public)
+https://your-cloudfront-domain/def-wc-subscriptions/def-wc-subscriptions.zip (private, requires auth)
+https://your-cloudfront-domain/def-wc-subscriptions/changelog.txt (public)
 ```
 
 ## Troubleshooting
@@ -303,10 +303,10 @@ git push origin main
 ### Testing CloudFront URLs
 ```bash
 # Test public changelog (should work)
-curl -I https://your-cloudfront-domain/digital-employee-wp-bridge/changelog.txt
+curl -I https://your-cloudfront-domain/def-wc-subscriptions/changelog.txt
 
 # Test private ZIP (will require authentication)
-curl -I https://your-cloudfront-domain/digital-employee-wp-bridge/digital-employee-wp-bridge.zip
+curl -I https://your-cloudfront-domain/def-wc-subscriptions/def-wc-subscriptions.zip
 ```
 
 ## Testing
