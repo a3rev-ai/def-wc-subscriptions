@@ -79,3 +79,6 @@ final class DEF_WC_Subscriptions_Cache {
 		}
 	}
 }
+
+// Initialize cache handler.
+DEF_WC_Subscriptions_Cache::init();

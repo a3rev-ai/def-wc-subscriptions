@@ -71,7 +71,4 @@ function def_module_wc_subscriptions_load(): void {
 	// Load includes.
 	require_once __DIR__ . '/includes/class-def-wc-subscriptions-tool.php';
 	require_once __DIR__ . '/includes/class-def-wc-subscriptions-cache.php';
-
-	// Initialize cache handler.
-	DEF_WC_Subscriptions_Cache::init();
 }
