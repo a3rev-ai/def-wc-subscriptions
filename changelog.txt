@@ -1,4 +1,11 @@
-*** Digital Employees - WooCommerce Subscriptions Changelog ***
+*** Digital Employees – WooCommerce Subscriptions Changelog ***
+
+= 1.1.0 - 2026/04/02 =
+* Improvement: Open-source release — removed commercial update infrastructure
+* Improvement: GitHub release workflow for downloadable zip
+* Fix: License updated to GPLv2 or later
+* Fix: Removed a3rev Dashboard requirement
+* Fix: Removed CloudFront-based auto-updater
 
 = 1.0.0 - 2026/01/02 =
 * Initial Release
