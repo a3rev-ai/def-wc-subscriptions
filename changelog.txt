@@ -1,5 +1,9 @@
 *** Digital Employees – WooCommerce Subscriptions Changelog ***
 
+= 1.2.0 - 2026/04/02 =
+* New: GitHub-based auto-updater via DEF_Core_GitHub_Updater (requires def-core 1.9.0+)
+* Feature: Supports WordPress native auto-update toggle
+
 = 1.1.0 - 2026/04/02 =
 * Improvement: Open-source release — removed commercial update infrastructure
 * Improvement: GitHub release workflow for downloadable zip

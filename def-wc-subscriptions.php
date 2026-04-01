@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Digital Employees – WooCommerce Subscriptions
  * Description: WooCommerce Subscriptions module for Digital Employee Framework - Core. Provides subscription API tools for Digital Employees.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: a3rev
  * Author URI: https://a3rev.com/
  * Text Domain: def-wc-subscriptions
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION' ) ) {
-	define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.1.0' );
+	define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.2.0' );
 }
 
 define( 'DEF_MODULE_WC_SUBSCRIPTIONS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -53,4 +53,15 @@ add_action( 'def_core_inited', 'def_module_wc_subscriptions_load', 10, 0 );
 function def_module_wc_subscriptions_load(): void {
 	require_once __DIR__ . '/includes/class-def-wc-subscriptions-tool.php';
 	require_once __DIR__ . '/includes/class-def-wc-subscriptions-cache.php';
+
+	// GitHub auto-updater (uses DEF_Core_GitHub_Updater from def-core).
+	if ( class_exists( 'DEF_Core_GitHub_Updater' ) ) {
+		new DEF_Core_GitHub_Updater( array(
+			'file'    => __FILE__,
+			'repo'    => 'a3rev-ai/def-wc-subscriptions',
+			'slug'    => 'def-wc-subscriptions',
+			'asset'   => 'def-wc-subscriptions.zip',
+			'version' => DEF_MODULE_WC_SUBSCRIPTIONS_VERSION,
+		) );
+	}
 }
