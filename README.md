@@ -2,7 +2,7 @@
 
 A module plugin for [Digital Employees](https://github.com/a3rev-ai/def-core) that adds WooCommerce Subscriptions integration. Provides subscription API tools for Digital Employee AI assistants.
 
-[![Download Plugin](https://img.shields.io/badge/Download_Plugin-v1.2.0-blue?style=for-the-badge&logo=wordpress)](https://github.com/a3rev-ai/def-wc-subscriptions/releases/download/v1.2.0/def-wc-subscriptions.zip) [![License: GPL v2+](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)](https://www.gnu.org/licenses/gpl-2.0.html) [![WordPress 6.2+](https://img.shields.io/badge/WordPress-6.2+-21759b?style=for-the-badge&logo=wordpress)](https://wordpress.org/)
+[![Download Plugin](https://img.shields.io/badge/Download_Plugin-v1.2.1-blue?style=for-the-badge&logo=wordpress)](https://github.com/a3rev-ai/def-wc-subscriptions/releases/download/v1.2.1/def-wc-subscriptions.zip) [![License: GPL v2+](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)](https://www.gnu.org/licenses/gpl-2.0.html) [![WordPress 6.2+](https://img.shields.io/badge/WordPress-6.2+-21759b?style=for-the-badge&logo=wordpress)](https://wordpress.org/)
 
 ## Requirements
 
