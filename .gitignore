@@ -52,3 +52,9 @@ wp-config.php
 node_modules/
 .bit/
 package-lock.json
+# Composer
+vendor/
+composer.lock
+
+# PHPUnit
+.phpunit.result.cache
