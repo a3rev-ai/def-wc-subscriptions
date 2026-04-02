@@ -1,5 +1,8 @@
 *** Digital Employees – WooCommerce Subscriptions Changelog ***
 
+= 1.2.2 - 2026/04/02 =
+* Fix: Updated Tested up to 6.9.4 — WordPress update page now shows "100% compatible" instead of "Unknown"
+
 = 1.2.1 - 2026/04/02 =
 * Fix: Removed Requires Plugins header — caused activation failure on sites where def-core installs as "digital-employees" and WC Subscriptions is not on wp.org
 * Improved: PHPUnit test suite deepened — happy-path payload tests, total_spent calculation, refund/failed edge cases, strict hook callback wiring assertions
