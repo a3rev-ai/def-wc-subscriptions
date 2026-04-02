@@ -23,7 +23,7 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 
 // ── WordPress function stubs ────────────────────────────────────────────
 
-// Track add_action calls for verification.
+// Track add_action calls for verification (includes accepted_args).
 global $_test_actions;
 $_test_actions = array();
 
@@ -31,9 +31,10 @@ if ( ! function_exists( 'add_action' ) ) {
     function add_action( string $hook, $callback, int $priority = 10, int $accepted_args = 1 ): void {
         global $_test_actions;
         $_test_actions[] = array(
-            'hook'     => $hook,
-            'callback' => $callback,
-            'priority' => $priority,
+            'hook'          => $hook,
+            'callback'      => $callback,
+            'priority'      => $priority,
+            'accepted_args' => $accepted_args,
         );
     }
 }
@@ -137,8 +138,6 @@ if ( ! class_exists( 'DEF_Core_Tool_Base' ) ) {
 
         public function __construct() {
             $this->init();
-            // In real plugin, auto-registers if should_register() returns true.
-            // In tests, we just instantiate — no registration side effects.
         }
 
         abstract protected function init(): void;
@@ -169,11 +168,5 @@ if ( ! class_exists( 'DEF_Core_Tool_Base' ) ) {
 }
 
 // ── Load source files ───────────────────────────────────────────────────
-// Note: class-def-wc-subscriptions-cache.php calls DEF_WC_Subscriptions_Cache::init()
-// at file load time, which calls add_action() — our stub captures those.
 require_once dirname( __DIR__, 2 ) . '/includes/class-def-wc-subscriptions-cache.php';
-
-// class-def-wc-subscriptions-tool.php has an add_action('plugins_loaded', ...) at
-// the bottom that instantiates the tool. We load the file which defines the class
-// and registers that hook (captured by our stub).
 require_once dirname( __DIR__, 2 ) . '/includes/class-def-wc-subscriptions-tool.php';

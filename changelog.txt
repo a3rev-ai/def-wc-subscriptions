@@ -1,5 +1,10 @@
 *** Digital Employees – WooCommerce Subscriptions Changelog ***
 
+= 1.2.1 - 2026/04/02 =
+* Fix: Removed Requires Plugins header — caused activation failure on sites where def-core installs as "digital-employees" and WC Subscriptions is not on wp.org
+* Improved: PHPUnit test suite deepened — happy-path payload tests, total_spent calculation, refund/failed edge cases, strict hook callback wiring assertions
+* Dev: Version bump to 1.2.1
+
 = 1.2.0 - 2026/04/02 =
 * New: GitHub-based auto-updater via DEF_Core_GitHub_Updater (requires def-core 1.9.0+)
 * Feature: Supports WordPress native auto-update toggle
