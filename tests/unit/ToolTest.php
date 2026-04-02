@@ -83,6 +83,27 @@ class ToolTest extends TestCase {
         $this->assertFalse( $tool->test_should_register() );
     }
 
+    /**
+     * Test the WC() function fallback path — WooCommerce class absent but WC() function exists.
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function test_should_register_true_via_wc_function_fallback(): void {
+        // No WooCommerce class — but WC() function exists (alternative bootstrap).
+        if ( ! function_exists( 'WC' ) ) {
+            eval( 'function WC() { return new stdClass(); }' );
+        }
+        if ( ! class_exists( 'WC_Subscriptions' ) ) {
+            eval( 'class WC_Subscriptions {}' );
+        }
+        if ( ! function_exists( 'wcs_get_users_subscriptions' ) ) {
+            eval( 'function wcs_get_users_subscriptions( $user_id ) { return array(); }' );
+        }
+        $tool = new Testable_WC_Subscriptions_Tool();
+        $this->assertTrue( $tool->test_should_register() );
+    }
+
     // ── handle_request() — auth and error paths ─────────────────────
 
     public function test_handle_request_returns_401_without_user(): void {
@@ -196,6 +217,38 @@ class ToolTest extends TestCase {
         $sub = $response->get_data()['subscriptions'][0];
         // Parent completed 29.99 only — failed renewal excluded.
         $this->assertSame( '29.99', $sub['total_spent'] );
+    }
+
+    /**
+     * Test defensive branches: wc_get_order() returns null for a renewal,
+     * and get_date_created() returns null on the parent order.
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function test_handle_request_missing_order_and_null_date(): void {
+        require_once __DIR__ . '/stubs/wc-stubs-nulls.php';
+
+        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
+        $tool = new Testable_WC_Subscriptions_Tool();
+        $response = $tool->handle_request( new WP_REST_Request() );
+
+        $this->assertSame( 200, $response->get_status() );
+        $data = $response->get_data();
+        $sub  = $data['subscriptions'][0];
+
+        // Parent order has null date.
+        $this->assertNotNull( $sub['parent_order'] );
+        $this->assertNull( $sub['parent_order']['date'] );
+        $this->assertSame( '29.99', $sub['parent_order']['total'] );
+
+        // Renewal 301 returned null from wc_get_order — should be skipped entirely.
+        // Only renewal 302 (completed, 15.00) should appear.
+        $this->assertCount( 1, $sub['renewal_orders'] );
+        $this->assertSame( 302, $sub['renewal_orders'][0]['id'] );
+
+        // Total spent: parent completed 29.99 + renewal 302 completed 15.00 = 44.99.
+        $this->assertSame( '44.99', $sub['total_spent'] );
     }
 
     // ── Cache delegation ────────────────────────────────────────────
