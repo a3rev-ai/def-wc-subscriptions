@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Digital Employees – WooCommerce Subscriptions
  * Description: WooCommerce Subscriptions module for Digital Employee Framework - Core. Provides subscription API tools for Digital Employees.
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: a3rev
  * Author URI: https://a3rev.com/
  * Text Domain: def-wc-subscriptions
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION' ) ) {
-	define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.2.1' );
+	define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.2.2' );
 }
 
 define( 'DEF_MODULE_WC_SUBSCRIPTIONS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
