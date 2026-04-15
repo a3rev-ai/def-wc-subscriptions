@@ -1,5 +1,11 @@
 *** Digital Employees – WooCommerce Subscriptions Changelog ***
 
+= 1.2.3 - 2026/04/15 =
+* This maintenance release has compatibility with WordPress 7.0, WooCommerce 10.6
+* Tweak - Tested for compatibility with WordPress 7.0
+* Tweak - Tested for compatibility with WooCommerce 10.6
+* Tweak - Improved plugin initialization sequence for better reliability
+
 = 1.2.2 - 2026/04/02 =
 * Fix: Updated Tested up to 6.9.4 — WordPress update page now shows "100% compatible" instead of "Unknown"
 

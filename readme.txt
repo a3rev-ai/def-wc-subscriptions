@@ -2,9 +2,10 @@
 Contributors: a3rev
 Tags: subscriptions, woocommerce, api, digital employee, ai
 Requires at least: 6.2
-Tested up to: 6.9.4
+Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.2.2
+WC tested up to: 10.6
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +41,15 @@ Digital Employee AI assistants use this endpoint to answer subscription-related 
 
 == Changelog ==
 
+= 1.2.3 - 2026/04/15 =
+* This maintenance release has compatibility with WordPress 7.0, WooCommerce 10.6
+* Tweak - Tested for compatibility with WordPress 7.0
+* Tweak - Tested for compatibility with WooCommerce 10.6
+* Tweak - Improved plugin initialization sequence for better reliability
+
+= 1.2.2 - 2026/04/02 =
+* Fix: Updated Tested up to 6.9.4 — WordPress update page now shows "100% compatible" instead of "Unknown"
+
 = 1.1.0 - 2026/04/02 =
 * Improvement: Open-source release — removed commercial update infrastructure
 * Improvement: GitHub release workflow for downloadable zip
@@ -48,6 +58,11 @@ Digital Employee AI assistants use this endpoint to answer subscription-related 
 
 = 1.0.0 - 2026/01/02 =
 * Initial release
+
+== Upgrade Notice ==
+
+= 1.2.3 =
+This maintenance release has compatibility with WordPress 7.0, WooCommerce 10.6.
 
 == License ==
 

@@ -191,10 +191,10 @@ class DEF_WC_Subscriptions_Tool extends DEF_Core_Tool_Base {
  * @version 0.2.0
  */
 add_action(
-	'plugins_loaded',
+	'init',
 	function () {
 		// Instantiate the tool - it will auto-register via base class if WooCommerce and WooCommerce Subscriptions are active.
 		new DEF_WC_Subscriptions_Tool();
 	},
-	20 // Priority 20 to ensure main plugin is loaded first.
+	20 // After textdomain loads on init priority 0.
 );
