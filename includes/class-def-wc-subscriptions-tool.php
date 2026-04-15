@@ -196,5 +196,6 @@ add_action(
 		// Instantiate the tool - it will auto-register via base class if WooCommerce and WooCommerce Subscriptions are active.
 		new DEF_WC_Subscriptions_Tool();
 	},
-	20 // After textdomain loads on init priority 0.
+	20, // After textdomain loads on init priority 0.
+	1
 );

@@ -275,11 +275,11 @@ class ToolTest extends TestCase {
 
     // ── Hook registration (strict callback wiring) ──────────────────
 
-    public function test_plugins_loaded_hook_wired_correctly(): void {
+    public function test_init_hook_wired_correctly(): void {
         global $_test_actions;
         $found = false;
         foreach ( $_test_actions as $action ) {
-            if ( 'plugins_loaded' === $action['hook']
+            if ( 'init' === $action['hook']
                 && 20 === $action['priority']
                 && is_callable( $action['callback'] )
                 && 1 === $action['accepted_args']
@@ -288,6 +288,6 @@ class ToolTest extends TestCase {
                 break;
             }
         }
-        $this->assertTrue( $found, 'Tool should register a callable on plugins_loaded at priority 20 with accepted_args 1' );
+        $this->assertTrue( $found, 'Tool should register a callable on init at priority 20 with accepted_args 1' );
     }
 }
