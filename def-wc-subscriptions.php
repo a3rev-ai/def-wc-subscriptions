@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Digital Employees – WooCommerce Subscriptions
- * Description: WooCommerce Subscriptions module for Digital Employee Framework - Core. Provides subscription API tools for Digital Employees.
- * Version: 1.2.3
+ * Plugin Name: Widrow AI – WooCommerce Subscriptions
+ * Description: WooCommerce Subscriptions module for Widrow AI. Provides subscription API tools for Digital Employees.
+ * Version: 1.3.0
  * Author: a3rev
  * Author URI: https://a3rev.com/
  * Text Domain: def-wc-subscriptions
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION' ) ) {
-	define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.2.3' );
+	define( 'DEF_MODULE_WC_SUBSCRIPTIONS_VERSION', '1.3.0' );
 }
 
 define( 'DEF_MODULE_WC_SUBSCRIPTIONS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -44,19 +44,19 @@ add_action( 'init', 'def_module_wc_subscriptions_load_textdomain', 0 );
 add_action(
 	'admin_notices',
 	function () {
-		if ( class_exists( 'DEF_Core' ) ) {
+		if ( class_exists( 'Widrow_AI' ) ) {
 			return;
 		}
 
 		?>
 		<div class="notice notice-error">
-			<p><?php esc_html_e( 'Digital Employees – WooCommerce Subscriptions requires Digital Employee Framework - Core to be installed and activated.', 'def-wc-subscriptions' ); ?></p>
+			<p><?php esc_html_e( 'Widrow AI – WooCommerce Subscriptions requires Widrow AI to be installed and activated.', 'def-wc-subscriptions' ); ?></p>
 		</div>
 		<?php
 	}
 );
 
-add_action( 'def_core_inited', 'def_module_wc_subscriptions_load', 10, 0 );
+add_action( 'widrow_ai_inited', 'def_module_wc_subscriptions_load', 10, 0 );
 
 /**
  * Load module files.
@@ -65,9 +65,9 @@ function def_module_wc_subscriptions_load(): void {
 	require_once __DIR__ . '/includes/class-def-wc-subscriptions-tool.php';
 	require_once __DIR__ . '/includes/class-def-wc-subscriptions-cache.php';
 
-	// GitHub auto-updater (uses DEF_Core_GitHub_Updater from def-core).
-	if ( class_exists( 'DEF_Core_GitHub_Updater' ) ) {
-		new DEF_Core_GitHub_Updater(
+	// GitHub auto-updater (uses Widrow_AI_GitHub_Updater from Widrow AI).
+	if ( class_exists( 'Widrow_AI_GitHub_Updater' ) ) {
+		new Widrow_AI_GitHub_Updater(
 			array(
 				'file'    => __FILE__,
 				'repo'    => 'a3rev-ai/def-wc-subscriptions',

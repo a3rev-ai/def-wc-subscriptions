@@ -1,12 +1,12 @@
-# Digital Employees – WooCommerce Subscriptions
+# Widrow AI – WooCommerce Subscriptions
 
-A module plugin for [Digital Employees](https://github.com/a3rev-ai/def-core) that adds WooCommerce Subscriptions integration. Provides subscription API tools for Digital Employee AI assistants.
+A module plugin for [Widrow AI](https://github.com/a3rev-ai/widrow) that adds WooCommerce Subscriptions integration. Provides subscription API tools for Digital Employee AI assistants.
 
 [![Download Plugin](https://img.shields.io/badge/Download_Plugin-v1.2.3-blue?style=for-the-badge&logo=wordpress)](https://github.com/a3rev-ai/def-wc-subscriptions/releases/download/v1.2.3/def-wc-subscriptions.zip) [![License: GPL v2+](https://img.shields.io/badge/License-GPL_v2+-green?style=for-the-badge)](https://www.gnu.org/licenses/gpl-2.0.html) [![WordPress 6.2+](https://img.shields.io/badge/WordPress-6.2+-21759b?style=for-the-badge&logo=wordpress)](https://wordpress.org/)
 
 ## Requirements
 
-- [Digital Employee Framework - Core](https://github.com/a3rev-ai/def-core) (active)
+- [Widrow AI](https://github.com/a3rev-ai/widrow) 10.0.0 or later (active)
 - [WooCommerce](https://woocommerce.com/) (active)
 - [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) (active)
 - WordPress 6.2+ / PHP 8.0+
@@ -59,13 +59,13 @@ Returns subscriptions for the authenticated user (JWT required).
 
 ## Why a Separate Plugin?
 
-WooCommerce Subscriptions is a commercial plugin that not all def-core users will have. Per the [Module Development Guide](https://github.com/a3rev-ai/def-core/blob/main/MODULE_DEVELOPMENT.md), integrations for commercial plugins are built as separate modules rather than bundled into def-core.
+WooCommerce Subscriptions is a commercial plugin that not all Widrow AI users will have. Per the [Module Development Guide](https://github.com/a3rev-ai/widrow/blob/main/MODULE_DEVELOPMENT.md), integrations for commercial plugins are built as separate modules rather than bundled into Widrow AI.
 
-This plugin follows the same `DEF_Core_Tool_Base` pattern as def-core's built-in tools — it just ships independently.
+This plugin follows the same `Widrow_AI_Tool_Base` pattern as Widrow AI's built-in tools — it just ships independently.
 
 ## Development
 
-See the [Module Development Guide](https://github.com/a3rev-ai/def-core/blob/main/MODULE_DEVELOPMENT.md) for the full module architecture, base class API, and conventions.
+See the [Module Development Guide](https://github.com/a3rev-ai/widrow/blob/main/MODULE_DEVELOPMENT.md) for the full module architecture, base class API, and conventions.
 
 ## License
 

@@ -2,7 +2,7 @@
 /**
  * Class DEF_WC_Subscriptions_Tool
  *
- * The WooCommerce Subscriptions module tools for Digital Employee Framework - Core.
+ * The WooCommerce Subscriptions module tools for Widrow AI.
  *
  * @package def-wc-subscriptions
  * @since 0.1.0
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 0.1.0
  * @version 0.1.0
  */
-class DEF_WC_Subscriptions_Tool extends DEF_Core_Tool_Base {
+class DEF_WC_Subscriptions_Tool extends Widrow_AI_Tool_Base {
 
 	/**
 	 * Initialize the tool.
