@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap for def-wc-subscriptions unit tests.
  *
- * Defines WordPress and def-core stubs so tests run without
+ * Defines WordPress and Widrow AI stubs so tests run without
  * a full WordPress environment.
  *
  * @package def-wc-subscriptions/tests
@@ -94,9 +94,9 @@ if ( ! class_exists( 'WP_REST_Request' ) ) {
     }
 }
 
-// ── DEF_Core_Cache stub (trackable) ─────────────────────────────────────
-if ( ! class_exists( 'DEF_Core_Cache' ) ) {
-    class DEF_Core_Cache {
+// ── Widrow_AI_Cache stub (trackable) ─────────────────────────────────────
+if ( ! class_exists( 'Widrow_AI_Cache' ) ) {
+    class Widrow_AI_Cache {
         /** @var array Track calls to get_or_set */
         public static array $get_or_set_calls = array();
         /** @var array Track calls to invalidate_user */
@@ -125,9 +125,9 @@ if ( ! class_exists( 'DEF_Core_Cache' ) ) {
     }
 }
 
-// ── DEF_Core_Tool_Base stub ─────────────────────────────────────────────
-if ( ! class_exists( 'DEF_Core_Tool_Base' ) ) {
-    abstract class DEF_Core_Tool_Base {
+// ── Widrow_AI_Tool_Base stub ─────────────────────────────────────────────
+if ( ! class_exists( 'Widrow_AI_Tool_Base' ) ) {
+    abstract class Widrow_AI_Tool_Base {
         protected string $name    = '';
         protected string $route   = '';
         protected array  $methods = array();

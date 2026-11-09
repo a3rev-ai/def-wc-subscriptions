@@ -24,8 +24,8 @@ class ToolTest extends TestCase {
 
     protected function set_up(): void {
         parent::set_up();
-        DEF_Core_Tool_Base::$test_current_user = null;
-        DEF_Core_Cache::reset();
+        Widrow_AI_Tool_Base::$test_current_user = null;
+        Widrow_AI_Cache::reset();
         $this->tool = new Testable_WC_Subscriptions_Tool();
     }
 
@@ -107,7 +107,7 @@ class ToolTest extends TestCase {
     // ── handle_request() — auth and error paths ─────────────────────
 
     public function test_handle_request_returns_401_without_user(): void {
-        DEF_Core_Tool_Base::$test_current_user = null;
+        Widrow_AI_Tool_Base::$test_current_user = null;
         $response = $this->tool->handle_request( new WP_REST_Request() );
         $this->assertSame( 401, $response->get_status() );
         $data = $response->get_data();
@@ -116,7 +116,7 @@ class ToolTest extends TestCase {
     }
 
     public function test_handle_request_returns_400_without_wcs_function(): void {
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 1 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 1 );
         $response = $this->tool->handle_request( new WP_REST_Request() );
         $this->assertSame( 400, $response->get_status() );
         $data = $response->get_data();
@@ -133,7 +133,7 @@ class ToolTest extends TestCase {
     public function test_handle_request_success_with_subscriptions(): void {
         require_once __DIR__ . '/stubs/wc-stubs-happy.php';
 
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
         $tool = new Testable_WC_Subscriptions_Tool();
         $response = $tool->handle_request( new WP_REST_Request() );
 
@@ -176,7 +176,7 @@ class ToolTest extends TestCase {
             eval( 'function wcs_get_users_subscriptions( $uid ) { return array(); }' );
         }
 
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 1 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 1 );
         $tool = new Testable_WC_Subscriptions_Tool();
         $response = $tool->handle_request( new WP_REST_Request() );
 
@@ -194,7 +194,7 @@ class ToolTest extends TestCase {
     public function test_handle_request_refunded_order_counts_in_total_spent(): void {
         require_once __DIR__ . '/stubs/wc-stubs-refund.php';
 
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
         $tool = new Testable_WC_Subscriptions_Tool();
         $response = $tool->handle_request( new WP_REST_Request() );
 
@@ -210,7 +210,7 @@ class ToolTest extends TestCase {
     public function test_handle_request_failed_order_excluded_from_total_spent(): void {
         require_once __DIR__ . '/stubs/wc-stubs-failed.php';
 
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
         $tool = new Testable_WC_Subscriptions_Tool();
         $response = $tool->handle_request( new WP_REST_Request() );
 
@@ -229,7 +229,7 @@ class ToolTest extends TestCase {
     public function test_handle_request_missing_order_and_null_date(): void {
         require_once __DIR__ . '/stubs/wc-stubs-nulls.php';
 
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 42 );
         $tool = new Testable_WC_Subscriptions_Tool();
         $response = $tool->handle_request( new WP_REST_Request() );
 
@@ -262,12 +262,12 @@ class ToolTest extends TestCase {
             eval( 'function wcs_get_users_subscriptions( $uid ) { return array(); }' );
         }
 
-        DEF_Core_Tool_Base::$test_current_user = (object) array( 'ID' => 7 );
+        Widrow_AI_Tool_Base::$test_current_user = (object) array( 'ID' => 7 );
         $tool = new Testable_WC_Subscriptions_Tool();
         $tool->handle_request( new WP_REST_Request() );
 
-        $this->assertCount( 1, DEF_Core_Cache::$get_or_set_calls );
-        $call = DEF_Core_Cache::$get_or_set_calls[0];
+        $this->assertCount( 1, Widrow_AI_Cache::$get_or_set_calls );
+        $call = Widrow_AI_Cache::$get_or_set_calls[0];
         $this->assertSame( 'subscriptions', $call['key'] );
         $this->assertSame( 7, $call['user_id'] );
         $this->assertSame( 604800, $call['expiration'] );

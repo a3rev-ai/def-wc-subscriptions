@@ -13,7 +13,7 @@ class CacheTest extends TestCase {
 
     protected function set_up(): void {
         parent::set_up();
-        DEF_Core_Cache::reset();
+        Widrow_AI_Cache::reset();
     }
 
     // ── get_or_set() tests ──────────────────────────────────────────
@@ -27,8 +27,8 @@ class CacheTest extends TestCase {
 
         DEF_WC_Subscriptions_Cache::get_or_set( 'subscriptions', 42, 604800, $callback );
 
-        $this->assertCount( 1, DEF_Core_Cache::$get_or_set_calls );
-        $call = DEF_Core_Cache::$get_or_set_calls[0];
+        $this->assertCount( 1, Widrow_AI_Cache::$get_or_set_calls );
+        $call = Widrow_AI_Cache::$get_or_set_calls[0];
         $this->assertSame( 'subscriptions', $call['key'] );
         $this->assertSame( 42, $call['user_id'] );
         $this->assertSame( 604800, $call['expiration'] );
@@ -63,21 +63,21 @@ class CacheTest extends TestCase {
 
         DEF_WC_Subscriptions_Cache::on_subscription_changed( $subscription );
 
-        $this->assertCount( 1, DEF_Core_Cache::$invalidate_calls );
-        $call = DEF_Core_Cache::$invalidate_calls[0];
+        $this->assertCount( 1, Widrow_AI_Cache::$invalidate_calls );
+        $call = Widrow_AI_Cache::$invalidate_calls[0];
         $this->assertSame( 99, $call['user_id'] );
         $this->assertSame( 'subscriptions', $call['prefix'] );
     }
 
     public function test_on_subscription_changed_ignores_non_object(): void {
         DEF_WC_Subscriptions_Cache::on_subscription_changed( 'not an object' );
-        $this->assertCount( 0, DEF_Core_Cache::$invalidate_calls );
+        $this->assertCount( 0, Widrow_AI_Cache::$invalidate_calls );
     }
 
     public function test_on_subscription_changed_ignores_object_without_method(): void {
         $obj = new \stdClass();
         DEF_WC_Subscriptions_Cache::on_subscription_changed( $obj );
-        $this->assertCount( 0, DEF_Core_Cache::$invalidate_calls );
+        $this->assertCount( 0, Widrow_AI_Cache::$invalidate_calls );
     }
 
     public function test_on_subscription_changed_ignores_zero_user_id(): void {
@@ -88,7 +88,7 @@ class CacheTest extends TestCase {
         };
 
         DEF_WC_Subscriptions_Cache::on_subscription_changed( $subscription );
-        $this->assertCount( 0, DEF_Core_Cache::$invalidate_calls );
+        $this->assertCount( 0, Widrow_AI_Cache::$invalidate_calls );
     }
 
     // ── Hook registration (strict callback wiring) ──────────────────

@@ -1,19 +1,19 @@
-=== Digital Employees – WooCommerce Subscriptions ===
+=== Widrow AI – WooCommerce Subscriptions ===
 Contributors: a3rev
 Tags: subscriptions, woocommerce, api, digital employee, ai
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 8.0
 WC tested up to: 10.6
-Stable tag: 1.2.3
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Subscriptions module for Digital Employees. Provides subscription API tools for AI assistants.
+WooCommerce Subscriptions module for Widrow AI. Provides subscription API tools for AI assistants.
 
 == Description ==
 
-This module plugin extends [Digital Employee Framework - Core](https://github.com/a3rev-ai/def-core) with WooCommerce Subscriptions integration.
+This module plugin extends [Widrow AI](https://github.com/a3rev-ai/widrow) with WooCommerce Subscriptions integration.
 
 When active, it registers a `/tools/wc/subscriptions` REST endpoint that returns the authenticated user's subscription data — including status, renewal history, parent orders, and total spend.
 
@@ -25,11 +25,11 @@ Digital Employee AI assistants use this endpoint to answer subscription-related 
 * Parent order and full renewal history
 * Total spend calculation across all orders
 * 7-day intelligent cache with automatic invalidation
-* JWT authentication (via def-core)
+* JWT authentication (via Widrow AI)
 
 = Requirements =
 
-* Digital Employee Framework - Core plugin
+* Widrow AI plugin, 10.0.0 or later
 * WooCommerce plugin
 * WooCommerce Subscriptions plugin
 
@@ -40,6 +40,11 @@ Digital Employee AI assistants use this endpoint to answer subscription-related 
 3. Activate — the endpoint registers automatically when all dependencies are active
 
 == Changelog ==
+
+= 1.3.0 - 2026/11/09 =
+* This release has compatibility with Widrow AI 10.0.0, the renamed plugin. Install Widrow AI 10.0.0 first, then update this plugin.
+* Tweak - Follows the Widrow AI plugin's code rename (10.0.0): new hook and class names, requires Widrow AI. No change to what the tool does.
+* Tweak - The module is now named Widrow AI – WooCommerce Subscriptions, following the plugin it extends.
 
 = 1.2.3 - 2026/04/15 =
 * This maintenance release has compatibility with WordPress 7.0, WooCommerce 10.6
@@ -60,6 +65,9 @@ Digital Employee AI assistants use this endpoint to answer subscription-related 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+This release requires Widrow AI 10.0.0, the renamed plugin. Install Widrow AI 10.0.0 first, then update this plugin.
 
 = 1.2.3 =
 This maintenance release has compatibility with WordPress 7.0, WooCommerce 10.6.
